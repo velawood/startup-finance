@@ -1,7 +1,7 @@
 import { formatNumberWithCommas } from "@library/utils/numberFormatting";
 import { BestFit } from "@library/conversion-solver";
 import QuestionMarkTooltipComponent from "@/components/tooltip/QuestionMarkTooltip";
-import { CapTableOwnershipError } from "@library/cap-table";
+import { CapTableOwnershipError } from "@library/cap-table/types";
 
 export type OwnershipPctNotes = {
   error?: CapTableOwnershipError["type"];
