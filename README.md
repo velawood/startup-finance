@@ -48,8 +48,8 @@ If you're more comforable with a spreadsheet, we offer this script as a Google A
 ### React App
 
 1. Clone the repo
-1. Install node modules - `yarn install`
-1. Run the development server - `yarn dev`
+1. Install node modules - `pnpm install`
+1. Run the development server - `pnpm dev`
 1. Visit the localhost server at http://localhost:3000/startup-finance/safe-conversion
 
 ### Library
@@ -59,9 +59,9 @@ it's likely in the library. Please write a test showing the issue along with a p
 
 ### Testing / Linting / Staging
 
-This library is tested using Jest, which you can run with `yarn test`
+This library is tested using Jest, which you can run with `pnpm test`
 
-ESLint is used to keep the styling and lint for common errors, run lint with `yarn run lint`
+ESLint is used to keep the styling and lint for common errors, run lint with `pnpm run lint`
 
 Any commits push to staging will automatically get deployed to our staging worksheet, which you can find
 [here](https://docs.google.com/spreadsheets/d/1d34sADQwY_wv0qw01KDclKl2i0IRLG1hC1SvCb5EpHg)
