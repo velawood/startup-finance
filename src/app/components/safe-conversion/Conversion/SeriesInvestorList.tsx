@@ -42,7 +42,7 @@ const SeriesInvestorRow: React.FC<SeriesRowProps> = ({
 
   return (
     <div
-      className={`w-full max-w-full sm:max-w-[960px] mx-auto mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700`}
+      className={`w-full relative max-w-full sm:max-w-[960px] mx-auto mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700`}
     >
       <Button
         onClick={() => onDelete(data.id)}

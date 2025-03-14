@@ -114,7 +114,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
   return (
     <div className="pt-2">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="absolute text-nt84bluedarker dark:text-nt84lightblue top-0 right-0 p-2 z-10">
             <QuestionMarkTooltipComponent>
               <div className="max-w-72">
@@ -141,7 +141,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               : ""}
           </div>
         </Card>
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-0 text-center">
             <CardTitle className="text-xl font-semibold tracking-tight">
               {formatNumberWithCommas(current.pricedConversion.newSharesIssued)}
@@ -160,7 +160,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               : ""}
           </div>
         </Card>
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="absolute text-nt84bluedarker dark:text-nt84lightblue top-0 right-0 p-2 z-10">
             <QuestionMarkTooltipComponent>
               <div className="max-w-72">
@@ -189,7 +189,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               : ""}
           </div>
         </Card>
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="absolute text-nt84bluedarker dark:text-nt84lightblue top-0 right-0 p-2 z-10">
             <QuestionMarkTooltipComponent>
               <div className="max-w-72">
@@ -219,7 +219,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
           </div>
         </Card>
 
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-0 text-center">
             <CardTitle className="text-xl font-semibold tracking-tight">
               ${formatNumberWithCommas(current.preMoney)}
@@ -256,7 +256,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
         </Card>
 
         {/* Investment */}
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-0 text-center">
             <CardTitle className="text-xl font-semibold tracking-tight">
               ${formatNumberWithCommas(current.totalSeriesInvestment)}
@@ -292,7 +292,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
         {/* End Investment */}
 
         {/* PostMoney */}
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-0 text-center">
             <CardTitle className="text-xl font-semibold tracking-tight">
               ${formatNumberWithCommas(current.postMoney)}
@@ -302,7 +302,7 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
             <div className="text-sm font-semibold text-gray-600 dark:text-gray-200">
               Post Money
             </div>
-            <div className="flex flex-row justify-between px-6">
+            <div className="flex flex-row justify-between">
               <FaMinusCircle
                 size="20"
                 className="text-nt84blue hover:text-nt84bluedarker"
@@ -324,11 +324,28 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               />
             </div>
           </CardContent>
+          <CardFooter className="justify-between pt-0 mt-auto">
+            <Button
+              size="icon"
+              className="bg-nt84blue hover:bg-nt84bluedarker"
+              name="decrement"
+              onClick={() => decrement("preMoney")}
+            >
+              <FaMinusCircle />
+            </Button>
+            <div className="text-sm text-gray-600 dark:text-gray-200 z-10">
+              {changes.postMoney !== 0
+                ? ` (${
+                    changes.postMoney > 0 ? "+" : ""
+                  }$${formatNumberWithCommas(changes.postMoney)})`
+                : ""}
+            </div>
+          </CardContent>
         </Card>
         {/* End PostMoney */}
 
         {/* Target Options */}
-        <Card className="relative flex flex-col h-26">
+        <Card className="relative flex flex-col h-26 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="absolute text-nt84bluedarker dark:text-nt84lightblue top-0 right-0 p-2 z-10">
             <QuestionMarkTooltipComponent>
               The target percentage of the new options pool, after the priced
