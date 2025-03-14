@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa";
 import { useStore } from "zustand";
 
 import {
@@ -87,12 +88,48 @@ const Page: React.FC = () => {
     updateRecentStates(stateId, getSerializedSelector(state));
   }, [state, stateId]);
 
+  // Dark mode state
+  const [darkMode, setDarkMode] = useState(false);
+  const [showDarkModeToggle, setShowDarkModeToggle] = useState(false);
+  
+  // Check if we're on the specific domain and initialize dark mode state
+  useEffect(() => {
+    // Check if we're on localhost or the specific domain
+    const hostname = window.location.hostname;
+    setShowDarkModeToggle(hostname === 'localhost' || hostname === '1984vc.github.io');
+    
+    // Check if dark mode is already enabled
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    setDarkMode(isDarkMode);
+  }, []);
+  
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    document.documentElement.classList.toggle('dark', newMode);
+  };
+
   return (
     <div>
       <main className="flex min-h-screen flex-col items-center justify-between py-8">
         <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
           <Worksheet conversionState={state} currentStateId={stateId} loadById={loadById} createNewState={createNewState} />
         </div>
+        
+        {/* Dark mode toggle at bottom center */}
+        {showDarkModeToggle && (
+          <div className="w-full flex justify-center mt-8 mb-4">
+            <button 
+              onClick={toggleDarkMode}
+              className="p-2 rounded bg-nt84blue hover:bg-nt84bluedarker text-white text-sm flex items-center gap-2"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? <FaSun className="mr-1" /> : <FaMoon className="mr-1" />}
+              {darkMode ? "Debug: Light Mode" : "Debug: Dark Mode"}
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );
