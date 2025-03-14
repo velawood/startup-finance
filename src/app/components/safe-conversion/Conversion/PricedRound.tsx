@@ -324,23 +324,6 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               />
             </div>
           </CardContent>
-          <CardFooter className="justify-between pt-0 mt-auto">
-            <Button
-              size="icon"
-              className="bg-nt84blue hover:bg-nt84bluedarker"
-              name="decrement"
-              onClick={() => decrement("preMoney")}
-            >
-              <FaMinusCircle />
-            </Button>
-            <div className="text-sm text-gray-600 dark:text-gray-200 z-10">
-              {changes.postMoney !== 0
-                ? ` (${
-                    changes.postMoney > 0 ? "+" : ""
-                  }$${formatNumberWithCommas(changes.postMoney)})`
-                : ""}
-            </div>
-          </CardContent>
         </Card>
         {/* End PostMoney */}
 

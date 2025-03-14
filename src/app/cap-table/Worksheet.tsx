@@ -109,7 +109,7 @@ const Worksheet: React.FC<WorksheetProps> = ({
 
   return (
     <div className={"not-prose mx-4"}>
-      <div className="w-full flex justify-end gap-2">
+      <div className="w-full flex justify-end gap-2 mb-6">
         <Share url={getShareUrl(conversionState)}></Share>
         {localStorageWorks && (
           <Finder currentId={currentStateId} loadById={loadById}></Finder>
