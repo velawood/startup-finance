@@ -170,7 +170,7 @@ const Page: React.FC = () => {
 
         <div className="w-full max-w-5xl px-4 mt-24 border-t pt-8 border-gray-300 dark:border-gray-500">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            About the Captable Worksheet
+            About the Cap Table Worksheet
           </h1>
           
           <div className="space-y-6 text-gray-700 dark:text-gray-300">
