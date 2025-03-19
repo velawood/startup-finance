@@ -194,7 +194,7 @@ const Worksheet: React.FC<WorksheetProps> = ({
         <div>
           <div>
             <hr />
-            <h1 className="text-2xl font-bold mb-12 mt-12">3&#41; New Round </h1>
+            <h1 className="text-2xl font-bold mb-12 mt-24">3&#41; New Round </h1>
             <h1 className="text-lg font-bold mb-4">Round Details</h1>
             <div className="sm:max-w-[960px] mx-auto mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 relative">
               <div className="flex flex-wrap gap-4">
