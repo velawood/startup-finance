@@ -115,14 +115,14 @@ const Worksheet: React.FC<WorksheetProps> = ({
           <Finder currentId={currentStateId} loadById={loadById}></Finder>
         )}
         <Button
-          className="w-28 bg-nt84blue hover:bg-nt84bluedarker dark:text-white"
+          className="w-28 bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
           onClick={() => createNewState(false)}
         >
           Reset
           <FaArrowRotateLeft className="ml-2" width={20} />
         </Button>
       </div>
-      <h1 className="text-2xl font-bold mb-12 pl-2">1 Existing Cap Table</h1>
+      <h1 className="text-2xl font-bold mb-12 pl-2">1&#41;  Existing Cap Table</h1>
       <div>
         <ExisingShareholderList
           rows={getCommonOnlyCapTable(conversionState)}
@@ -137,7 +137,7 @@ const Worksheet: React.FC<WorksheetProps> = ({
           }}
         />
       </div>
-      <h1 className="text-2xl font-bold mb-12 mt-24 pl-2">2 SAFE Investors</h1>
+      <h1 className="text-2xl font-bold mb-12 mt-24 pl-2">2&#41; SAFE Investors</h1>
       <div>
         <SafeNoteList
           rows={getSAFERowPropsSelector(conversionState)}
@@ -176,14 +176,14 @@ const Worksheet: React.FC<WorksheetProps> = ({
         {hasPricedRound ? (
           <Button
             onClick={togglepriceRounds}
-            className="w-full bg-nt84blue hover:bg-nt84bluedarker dark:text-white"
+            className="w-full bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
           >
             Remove Priced Round
           </Button>
         ) : (
           <Button
             onClick={togglepriceRounds}
-            className="w-full bg-nt84blue hover:bg-nt84bluedarker dark:text-white"
+            className="w-full bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
           >
             Add Priced Round
           </Button>
@@ -194,7 +194,7 @@ const Worksheet: React.FC<WorksheetProps> = ({
         <div>
           <div>
             <hr />
-            <h1 className="text-2xl font-bold mb-12 mt-12">3 New Round </h1>
+            <h1 className="text-2xl font-bold mb-12 mt-12">3&#41; New Round </h1>
             <h1 className="text-lg font-bold mb-4">Round Details</h1>
             <div className="sm:max-w-[960px] mx-auto mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 relative">
               <div className="flex flex-wrap gap-4">

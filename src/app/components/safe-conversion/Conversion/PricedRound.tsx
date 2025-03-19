@@ -9,7 +9,7 @@ import {
 import QuestionMarkTooltipComponent from "@/components/tooltip/QuestionMarkTooltip";
 import { CapTableOwnershipError } from "@library/cap-table/types";
 
-import { FaMinusCircle, FaPlusCircle } from "react-icons/fa";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 export type OwnershipPctNotes = {
   error?: CapTableOwnershipError["type"];
@@ -230,8 +230,8 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               Pre Money
             </div>
             <div className="flex flex-row justify-between">
-              <FaMinusCircle
-                size="20"
+              <FaMinus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="decrement"
                 onClick={() => decrement("preMoney")}
@@ -245,8 +245,8 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
                     )})`
                   : ""}
               </div>
-              <FaPlusCircle
-                size="20"
+              <FaPlus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="increment"
                 onClick={() => increment("preMoney")}
@@ -267,8 +267,8 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               Investment
             </div>
             <div className="flex flex-row justify-between">
-              <FaMinusCircle
-                size="20"
+              <FaMinus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="decrement"
                 onClick={() => decrement("investment")}
@@ -280,8 +280,8 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
                     }$${formatNumberWithCommas(investmentChange)})`
                   : ""}
               </div>
-              <FaPlusCircle
-                size="20"
+              <FaPlus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="increment"
                 onClick={() => increment("investment")}
@@ -303,8 +303,8 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               Post Money
             </div>
             <div className="flex flex-row justify-between">
-              <FaMinusCircle
-                size="20"
+              <FaMinus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="decrement"
                 onClick={() => decrement("preMoney")}
@@ -316,8 +316,8 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
                     }$${formatNumberWithCommas(changes.postMoney)})`
                   : ""}
               </div>
-              <FaPlusCircle
-                size="20"
+              <FaPlus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="increment"
                 onClick={() => increment("preMoney")}
@@ -345,8 +345,8 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               Target Options
             </div>
             <div className="flex flex-row justify-between">
-              <FaMinusCircle
-                size="20"
+              <FaMinus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="decrement"
                 onClick={() => decrement("options")}
@@ -354,12 +354,12 @@ const PricedRound: React.FC<PricedRoundProps> = (props) => {
               <div className="text-sm text-gray-600 dark:text-gray-200 z-10">
                 {targetOptionsChange !== 0
                   ? ` (${targetOptionsChange > 0 ? "+" : ""}${
-                      currentTargetOptionsChange * 100
+                      Math.round(currentTargetOptionsChange * 100)
                     })`
                   : ""}
               </div>
-              <FaPlusCircle
-                size="20"
+              <FaPlus
+                size="16"
                 className="text-nt84blue hover:text-nt84bluedarker"
                 name="increment"
                 onClick={() => increment("options")}
