@@ -157,9 +157,9 @@ const Page: React.FC = () => {
               }
             >
               {darkMode ? (
-                <FaSun className="mr-0 md:mr-1" />
-              ) : (
                 <FaMoon className="mr-0 md:mr-1" />
+              ) : (
+                <FaSun className="mr-0 md:mr-1" />
               )}
               <span className="hidden md:inline">
                 {darkMode ? "Founder Mode" : "VC Mode"}
