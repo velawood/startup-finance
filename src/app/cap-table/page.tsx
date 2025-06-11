@@ -151,6 +151,7 @@ const Page: React.FC = () => {
             currentStateId={stateId}
             loadById={loadById}
             createNewState={createNewState}
+            updateState={(newState) => storeRef.current?.setState(newState)}
           />
         </div>
 

@@ -3,11 +3,12 @@ import CurrencyInput from "react-currency-input-field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { FaRegQuestionCircle } from "react-icons/fa";
+import { FaRegQuestionCircle, FaFileImport } from "react-icons/fa";
 
 import {
   IConversionState,
   SeriesState,
+  IConversionStateData,
 } from "@/cap-table/state/ConversionState";
 import ExisingShareholderList from "@/components/safe-conversion/Conversion/ExistingShareholders";
 import PricedRound from "@/components/safe-conversion/Conversion/PricedRound";
@@ -32,12 +33,15 @@ import {
 } from "./state/selectors/PricedRoundSelector";
 import TooltipComponent from "@/components/tooltip/Tooltip";
 import { CapTableRowType } from "@library/cap-table/types";
+import ImportModal from "@/components/cap-table/ImportModal";
+import { mergeImportData, MergeStrategy } from "./utils/import-data-mapper";
 
 type WorksheetProps = {
   conversionState: IConversionState;
   currentStateId: string;
   loadById: (id: string) => void;
   createNewState: (findRecent: boolean) => void;
+  updateState?: (newState: IConversionStateData) => void;
 };
 
 function usePrevious<T>(value: T) {
@@ -53,6 +57,7 @@ const Worksheet: React.FC<WorksheetProps> = ({
   currentStateId,
   loadById,
   createNewState,
+  updateState,
 }) => {
   const {
     rowData,
@@ -82,6 +87,7 @@ const Worksheet: React.FC<WorksheetProps> = ({
   const [preMoneyChange, updatePreMoneyChange] = useState(0);
   const [investmentChange, updateInvestmentChange] = useState(0);
   const [targetOptionsChange, updateTargetOptionsChange] = useState(0);
+  const [showImportModal, setShowImportModal] = useState(false);
 
   const errors = getErrorSelector(conversionState);
 
@@ -107,9 +113,42 @@ const Worksheet: React.FC<WorksheetProps> = ({
     setPostMoney(stringToNumber(val ?? 0));
   };
 
+  const handleImport = (importedData: IConversionStateData, strategy: MergeStrategy) => {
+    // Get current state data
+    const currentStateData: IConversionStateData = {
+      rowData,
+      preMoney,
+      targetOptionsPool,
+      unusedOptions: conversionState.unusedOptions,
+      pricedRounds
+    };
+
+    // Merge or replace based on strategy
+    const newState = strategy === MergeStrategy.Replace 
+      ? importedData 
+      : mergeImportData(currentStateData, importedData, strategy);
+
+    // If we have an updateState function from parent, use it
+    // Otherwise, create a new state (which will update the store)
+    if (updateState) {
+      updateState(newState);
+    } else {
+      // Fallback: create a new state with the imported data
+      // This will trigger the parent to update the store
+      createNewState(false);
+    }
+  };
+
   return (
     <div className={"not-prose mx-4"}>
       <div className="w-full flex justify-end gap-2 mb-6">
+        <Button
+          className="bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
+          onClick={() => setShowImportModal(true)}
+        >
+          Import
+          <FaFileImport className="ml-2" width={20} />
+        </Button>
         <Share url={getShareUrl(conversionState)}></Share>
         {localStorageWorks && (
           <Finder currentId={currentStateId} loadById={loadById}></Finder>
@@ -301,6 +340,13 @@ const Worksheet: React.FC<WorksheetProps> = ({
           </div>
         </div>
       )}
+      
+      {/* Import Modal */}
+      <ImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        onImport={handleImport}
+      />
     </div>
   );
 };
