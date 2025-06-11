@@ -75,24 +75,22 @@ const Page: React.FC = () => {
     updateRecentStates(stateId, getSerializedSelector(state));
   }, [state, stateId]);
 
-  // Dark mode state
+  // Dark mode state - default to light mode
   const [darkMode, setDarkMode] = useState(false);
   
-  // Initialize dark mode state based on local storage or system preference
+  // Initialize dark mode state based on local storage
   useEffect(() => {
     // Check local storage for theme preference
     const storedTheme = localStorage.getItem('color-theme');
     
-    if (storedTheme) {
-      // If we have a stored preference, use it
-      const isDarkMode = storedTheme === 'dark';
-      setDarkMode(isDarkMode);
-      document.documentElement.classList.toggle('dark', isDarkMode);
+    if (storedTheme === 'dark') {
+      // Only apply dark mode if explicitly set
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
     } else {
-      // If no stored preference, check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setDarkMode(prefersDark);
-      document.documentElement.classList.toggle('dark', prefersDark);
+      // Default to light mode
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
     }
   }, []);
   
@@ -106,41 +104,24 @@ const Page: React.FC = () => {
     localStorage.setItem('color-theme', newMode ? 'dark' : 'light');
   };
 
-  // Listen for system theme changes
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    const handleChange = (e: MediaQueryListEvent) => {
-      // Only apply system preference changes if no theme is set in localStorage
-      if (!localStorage.getItem('color-theme')) {
-        const prefersDark = e.matches;
-        setDarkMode(prefersDark);
-        document.documentElement.classList.toggle('dark', prefersDark);
-      }
-    };
-    
-    // Add event listener
-    mediaQuery.addEventListener('change', handleChange);
-    
-    // Clean up
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  // Removed system theme listener - always use explicit preference
 
   return (
-    <div>
-      <main className="flex min-h-screen flex-col items-center justify-between py-8">
+    <div className="min-h-screen bg-background">
+      <main className="flex min-h-screen flex-col items-center justify-between py-12">
         {/* Breadcrumb and Heading */}
-        <div className="z-10 w-full max-w-5xl mb-6 px-2">
-          <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+        <div className="z-10 w-full max-w-5xl mb-12 px-4">
+          <div className="text-sm text-muted-foreground mb-4">
             <a
-              className="hover:text-nt84orange"
+              className="hover:text-foreground transition-colors"
               href="https://1984.vc/docs/founders-handbook"
             >
               Founders Handbook
             </a>{" "}
-            &gt; <span>Cap Table Worksheet</span>
+            <span className="mx-2">&gt;</span> 
+            <span>Cap Table Worksheet</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-5xl font-light tracking-tight text-foreground">
             1984 Cap Table Worksheet
           </h1>
         </div>
@@ -156,31 +137,31 @@ const Page: React.FC = () => {
         </div>
 
         {/* Dark mode toggle at top right corner */}
-        <div className="absolute top-4 right-4">
+        <div className="fixed top-6 right-6 z-50">
           <button
             onClick={toggleDarkMode}
-            className="p-2 rounded bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm flex items-center gap-2 transition-colors"
+            className="p-2.5 rounded-md border border-border bg-background hover:bg-accent text-muted-foreground hover:text-foreground text-sm flex items-center gap-2 transition-all duration-200 shadow-sm"
             aria-label={
               darkMode ? "Switch to light mode" : "Switch to dark mode"
             }
           >
             {darkMode ? (
-              <FaMoon className="mr-0 md:mr-1" />
+              <FaMoon className="w-4 h-4" />
             ) : (
-              <FaSun className="mr-0 md:mr-1" />
+              <FaSun className="w-4 h-4" />
             )}
-            <span className="hidden md:inline">
-              {darkMode ? "Founder Mode" : "VC Mode"}
+            <span className="hidden md:inline text-xs font-medium">
+              {darkMode ? "Light Mode" : "Dark Mode"}
             </span>
           </button>
         </div>
 
-        <div className="w-full max-w-5xl px-4 mt-24 border-t pt-8 border-gray-300 dark:border-gray-500">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+        <div className="w-full max-w-5xl px-4 mt-32 pt-16 border-t border-border">
+          <h2 className="text-3xl font-light tracking-tight mb-8 text-foreground">
             About the Cap Table Worksheet
-          </h1>
+          </h2>
 
-          <div className="space-y-6 text-gray-700 dark:text-gray-300">
+          <div className="space-y-6 text-muted-foreground leading-relaxed text-base">
             <p className="leading-relaxed">
               At 1984 we believe founders should be able to quickly understand
               the decisions they make with regards to financing, particularly at
@@ -200,25 +181,25 @@ const Page: React.FC = () => {
                 href="https://github.com/1984vc/startup-finance"
                 target="_blank"
                 rel="noopener"
-                className="text-nt84orange hover:text-nt84orangedarker underline font-medium"
+                className="text-foreground hover:text-foreground/80 underline font-medium transition-colors"
               >
                 github
               </a>{" "}
               and 1984 hosts an instance at{" "}
               <a
                 href="/docs/cap-table-worksheet"
-                className="text-nt84orange hover:text-nt84orangedarker underline font-medium"
+                className="text-foreground hover:text-foreground/80 underline font-medium transition-colors"
               >
                 https://1984.vc/docs/cap-table-worksheet
               </a>
             </p>
 
-            <p className="leading-relaxed pt-2 border-t border-gray-200 dark:border-gray-700">
+            <p className="leading-relaxed pt-6 border-t border-border">
               We value all input! If you'd like to report bugs, provide
               feedback, or suggest improvements, please email{" "}
               <a
                 href="mailto:team@1984.vc"
-                className="text-nt84orange hover:text-nt84orangedarker underline font-medium"
+                className="text-foreground hover:text-foreground/80 underline font-medium transition-colors"
               >
                 team@1984.vc
               </a>

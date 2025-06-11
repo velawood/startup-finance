@@ -143,25 +143,26 @@ const Worksheet: React.FC<WorksheetProps> = ({
     <div className={"not-prose mx-4"}>
       <div className="w-full flex justify-end gap-2 mb-6">
         <Button
-          className="bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
+          variant="minimal"
           onClick={() => setShowImportModal(true)}
         >
           Import
-          <FaFileImport className="ml-2" width={20} />
+          <FaFileImport width={16} />
         </Button>
         <Share url={getShareUrl(conversionState)}></Share>
         {localStorageWorks && (
           <Finder currentId={currentStateId} loadById={loadById}></Finder>
         )}
         <Button
-          className="w-28 bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
+          variant="minimal"
+          className="w-28"
           onClick={() => createNewState(false)}
         >
           Reset
-          <FaArrowRotateLeft className="ml-2" width={20} />
+          <FaArrowRotateLeft width={16} />
         </Button>
       </div>
-      <h1 className="text-2xl font-bold mb-12 pl-2">1&#41;  Existing Cap Table</h1>
+      <h2 className="text-2xl font-normal tracking-tight mb-8 pl-2">1&#41;  Existing Cap Table</h2>
       <div>
         <ExisingShareholderList
           rows={getCommonOnlyCapTable(conversionState)}
@@ -176,7 +177,7 @@ const Worksheet: React.FC<WorksheetProps> = ({
           }}
         />
       </div>
-      <h1 className="text-2xl font-bold mb-12 mt-24 pl-2">2&#41; SAFE Investors</h1>
+      <h2 className="text-2xl font-normal tracking-tight mb-8 mt-24 pl-2">2&#41; SAFE Investors</h2>
       <div>
         <SafeNoteList
           rows={getSAFERowPropsSelector(conversionState)}
@@ -190,17 +191,17 @@ const Worksheet: React.FC<WorksheetProps> = ({
       <div className="pt-10">
         <div className="ml-2 pb-4 not-prose">
           {hasPricedRound ? (
-            <h1 className="text-lg font-bold mb-4 mt-4">
+            <h3 className="text-lg font-medium mb-4 mt-4">
               Cap Table Before Priced Round
-            </h1>
+            </h3>
           ) : (
             <TooltipComponent content="Until a priced round is entered, this is just an estimate based on the assumption that all SAFE's convert at their current Cap or, if uncapped, the maximum Cap of all SAFE's">
-              <h1 className="text-lg font-bold mb-4 mt-4">
+              <h3 className="text-lg font-medium mb-4 mt-4">
                 Cap Table Before Priced Round
                 <sup>
-                  <FaRegQuestionCircle className="inline ml-1" />
+                  <FaRegQuestionCircle className="inline ml-1 text-muted-foreground" />
                 </sup>
-              </h1>
+              </h3>
             </TooltipComponent>
           )}
         </div>
@@ -215,14 +216,16 @@ const Worksheet: React.FC<WorksheetProps> = ({
         {hasPricedRound ? (
           <Button
             onClick={togglepriceRounds}
-            className="w-full bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
+            variant="default"
+            className="w-full"
           >
             Remove Priced Round
           </Button>
         ) : (
           <Button
             onClick={togglepriceRounds}
-            className="w-full bg-nt84blue hover:bg-nt84bluedarker text-white dark:text-white"
+            variant="default"
+            className="w-full"
           >
             Add Priced Round
           </Button>
@@ -232,10 +235,10 @@ const Worksheet: React.FC<WorksheetProps> = ({
       {hasPricedRound && (
         <div>
           <div>
-            <hr />
-            <h1 className="text-2xl font-bold mb-12 mt-24">3&#41; New Round </h1>
-            <h1 className="text-lg font-bold mb-4">Round Details</h1>
-            <div className="sm:max-w-[960px] mx-auto mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 relative">
+            <hr className="border-border" />
+            <h2 className="text-2xl font-normal tracking-tight mb-8 mt-24">3&#41; New Round </h2>
+            <h3 className="text-lg font-medium mb-4">Round Details</h3>
+            <div className="sm:max-w-[960px] mx-auto mb-4 p-4 bg-muted/50 rounded-md border border-border relative">
               <div className="flex flex-wrap gap-4">
                 <div className="w-full sm:w-1/5 md:w-1/5 lg:w-1/5">
                   <h2 className="my-2 not-prose">Premoney Valuation</h2>
@@ -284,16 +287,16 @@ const Worksheet: React.FC<WorksheetProps> = ({
                   />
                 </div>
                 <div className="w-full sm:w-1/5 md:w-1/5 lg:w-1/5">
-                  <div className="text-gray-500 dark:text-gray-400 mb-1 my-2">
+                  <div className="text-muted-foreground mb-1 my-2">
                     Additional Options
                   </div>
-                  <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded">
+                  <div className="px-3 py-2 bg-background border border-input rounded-md">
                     {formatNumberWithCommas(pricedConversion?.additionalOptions || 0)}
                   </div>
                 </div>
               </div>
             </div>
-            <h1 className="text-lg font-bold mb-4 mt-12">Series Investors</h1>
+            <h3 className="text-lg font-medium mb-4 mt-12">Series Investors</h3>
             <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
               <SeriesInvestorList
                 rows={getSeriesPropsSelector(conversionState)}
@@ -305,11 +308,11 @@ const Worksheet: React.FC<WorksheetProps> = ({
           </div>
 
           <div className="pt-10">
-            <h2 className="text-2xl font-bold mb-4 not-prose">
+            <h2 className="text-2xl font-normal tracking-tight mb-4 not-prose">
               Priced Round Overview
             </h2>
             {errors.safeError && (
-              <p className="text-red-500 text-xl">SAFE Conversion Error</p>
+              <p className="text-destructive text-xl">SAFE Conversion Error</p>
             )}
             {!errors.safeError && (
               <div className="">
@@ -324,9 +327,9 @@ const Worksheet: React.FC<WorksheetProps> = ({
                   updatePreMoneyChange={updatePreMoneyChange}
                   updateTargetOptionsChange={updateTargetOptionsChange}
                 />
-                <h2 className="text-lg font-bold mb-4 mt-8 not-prose">
+                <h3 className="text-lg font-medium mb-4 mt-8 not-prose">
                   Cap Table after Priced Round
-                </h2>
+                </h3>
                 <CapTableResults
                   {...getPricedRoundCapTableSelector({
                     ...conversionState,

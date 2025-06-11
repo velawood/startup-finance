@@ -27,24 +27,20 @@ const Share: React.FC<{ url: string }> = ({ url }) => {
   const buttonText = () => {
     if (isUpdatedRef.current) {
       return (
-        <span>
+        <>
           Share
-          <span className="inline">
-            <FaBookmark className="inline ml-2" width={20} />
-          </span>
-        </span>
+          <FaBookmark width={16} />
+        </>
       );
     }
     if (isCopied) {
       return "Copied!";
     }
     return (
-      <span>
+      <>
         Share
-        <span className="inline">
-          <FaRegBookmark className="inline ml-2" width={20} />
-        </span>
-      </span>
+        <FaRegBookmark width={16} />
+      </>
     );
   };
 
@@ -55,11 +51,8 @@ const Share: React.FC<{ url: string }> = ({ url }) => {
   return (
     <div className="">
       <Button
-        className={`w-28 dark:text-white ${
-          isUpdatedRef.current
-            ? "bg-nt84orange hover:bg-nt84orangedarker focus:ring-nt84orangedarker"
-            : "bg-gray-400 hover:bg-gray-500 focus:ring-gray-300"
-        }`}
+        variant="minimal"
+        className="w-28"
         onClick={() => setShowModal(true)}
       >
         {buttonText()}
@@ -67,38 +60,39 @@ const Share: React.FC<{ url: string }> = ({ url }) => {
       {showModal && (
         <div className="fixed z-50 inset-0 flex items-center justify-center overflow-hidden">
           <div className="fixed inset-0 transition-opacity">
-            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            <div className="absolute inset-0 bg-black/50"></div>
           </div>
 
-          <div className=" text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-            <div className="bg-white dark:bg-gray-900 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <h3 className="text-xl leading-6 font-medium text-gray-900 dark:text-gray-100 mb-4">
+          <div className="text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+            <div className="bg-background px-4 pt-5 pb-4 sm:p-6 sm:pb-4 rounded-t-md">
+              <h3 className="text-xl leading-6 font-medium mb-4">
                 Save this worksheet
               </h3>
-              <p>
+              <p className="text-muted-foreground">
                 The link to this worksheet contains all your cap table data in
                 the URL. If you update it make sure to share the updated link!
               </p>
               <div className="mt-4">
                 <input
-                  className="flex-1 w-full px-3 py-2 border  focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-1 focus:ring-ring focus:border-transparent"
                   onFocus={handleFocus}
                   onChange={() => {}}
                   value={url}
                 ></input>
               </div>
             </div>
-            <div className="bg-gray-200 dark:bg-gray-800 px-4 py-3 sm:flex sm:flex-row-reverse">
+            <div className="bg-muted px-4 py-3 sm:flex sm:flex-row-reverse rounded-b-md">
               <Button
                 type="button"
-                className="w-36 bg-blue-600 hover:bg-blue-700 sm:ml-3 sm:text-sm"
+                variant="default"
+                className="w-36 sm:ml-3 sm:text-sm"
                 onClick={onClickCopy}
               >
                 {isCopied ? "Copied!" : "Copy"}
               </Button>
               <Button
                 type="button"
-                variant="secondary"
+                variant="minimal"
                 className="sm:ml-3 sm:w-auto sm:text-sm"
                 onClick={() => setShowModal(false)}
               >

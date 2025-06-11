@@ -48,7 +48,7 @@ const ExistingShareholderRow: React.FC<ExistingShareholderRowProps> = ({
   const getTooltipButton = () => {
     if (data.id === "UnusedOptionsPool") {
       return (
-        <div className="inline-block text-nt84bluedarker dark:text-nt84lightblue">
+        <div className="inline-block text-muted-foreground">
           <QuestionMarkTooltipComponent>
             <div className="max-w-72">
               <p>
@@ -66,7 +66,7 @@ const ExistingShareholderRow: React.FC<ExistingShareholderRowProps> = ({
       );
     } else if (data.id === "IssuedOptions") {
       return (
-        <div className="inline-block text-nt84bluedarker dark:text-nt84lightblue">
+        <div className="inline-block text-muted-foreground">
           <QuestionMarkTooltipComponent>
             <div className="max-w-72">
               Options or shares already issued to other employees, advisors, or
@@ -80,7 +80,7 @@ const ExistingShareholderRow: React.FC<ExistingShareholderRowProps> = ({
   };
 
   return (
-    <div className="w-full max-w-full sm:max-w-[960px] mx-auto mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 relative">
+    <div className="w-full max-w-full sm:max-w-[960px] mx-auto mb-4 p-3 bg-muted/50 rounded-md border border-border relative">
       {allowDelete && (
         <Button
           onClick={() => {
@@ -95,12 +95,12 @@ const ExistingShareholderRow: React.FC<ExistingShareholderRowProps> = ({
       <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
         <div className="mb-3 md:mb-0 md:flex-1">
           {disableNameEdit ? (
-            <span className="ml-2 inline-block font-bold text-gray-900 dark:text-white">
+            <span className="ml-2 inline-block font-medium">
               {data.name} {getTooltipButton()}
             </span>
           ) : (
             <div>
-              <div className="text-gray-500 dark:text-gray-400 mb-1">Name</div>
+              <div className="text-muted-foreground mb-1">Name</div>
               <Input
                 type="text"
                 name="name"
@@ -108,21 +108,21 @@ const ExistingShareholderRow: React.FC<ExistingShareholderRowProps> = ({
                 value={data.name}
                 onChange={handleInputChange}
                 placeholder="Common Shareholder Name"
-                className="w-full bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full"
               />
             </div>
           )}
         </div>
 
         <div className="mb-3 md:mb-0 md:flex-1">
-          <div className="text-gray-500 dark:text-gray-400 mb-1">Shares</div>
+          <div className="text-muted-foreground mb-1">Shares</div>
           <CurrencyInput
             type="text"
             name="shares"
             value={data.shares}
             onValueChange={onValueChange}
             placeholder="Shares"
-            className="w-full bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full"
             prefix=""
             decimalScale={0}
             allowDecimals={false}
@@ -131,10 +131,10 @@ const ExistingShareholderRow: React.FC<ExistingShareholderRowProps> = ({
         </div>
 
         <div className="mb-3 md:mb-0 md:flex-1">
-          <div className="text-gray-500 dark:text-gray-400 mb-1">
+          <div className="text-muted-foreground mb-1">
             Ownership %
           </div>
-          <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded">
+          <div className="px-3 py-2 bg-background border border-input rounded-md">
             {(ownership * 100).toFixed(2)}%
           </div>
         </div>
@@ -192,7 +192,8 @@ const ExisingShareholderList: React.FC<RowsProps<ExistingShareholderProps>> = ({
       <div className="w-full max-w-full sm:max-w-[960px] mx-auto">
         <Button
           onClick={onAddRow}
-          className="w-full bg-nt84blue hover:bg-nt84bluedarker dark:text-white"
+          variant="default"
+          className="w-full"
         >
           + Add another Shareholder
         </Button>

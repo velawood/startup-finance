@@ -42,7 +42,7 @@ const SeriesInvestorRow: React.FC<SeriesRowProps> = ({
 
   return (
     <div
-      className={`w-full relative max-w-full sm:max-w-[960px] mx-auto mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700`}
+      className={`w-full relative max-w-full sm:max-w-[960px] mx-auto mb-4 p-4 bg-muted/50 rounded-md border border-border`}
     >
       <Button
         onClick={() => onDelete(data.id)}
@@ -50,8 +50,8 @@ const SeriesInvestorRow: React.FC<SeriesRowProps> = ({
         variant="ghost"
         className={`p-0 h-auto absolute top-3 right-1 ${
           data.allowDelete
-            ? "text-red-400 hover:text-red-500"
-            : "text-gray-500 cursor-not-allowed"
+            ? "text-destructive hover:text-destructive/80"
+            : "text-muted-foreground cursor-not-allowed"
         }`}
       >
         <FaRegTrashCan className="inline" width={20} />
@@ -59,7 +59,7 @@ const SeriesInvestorRow: React.FC<SeriesRowProps> = ({
 
       <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
         <div className="mb-3 md:mb-0 md:flex-1">
-          <div className="text-gray-500 dark:text-gray-400 mb-1">Name</div>
+          <div className="text-muted-foreground mb-1">Name</div>
           <Input
             type="text"
             name="name"
@@ -67,11 +67,11 @@ const SeriesInvestorRow: React.FC<SeriesRowProps> = ({
             value={data.name}
             onChange={handleInputChange}
             placeholder="Series Investor Name"
-            className="w-full bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full"
           />
         </div>
         <div className="mb-3 md:mb-0 md:flex-1">
-          <div className="text-gray-500 dark:text-gray-400 mb-1">
+          <div className="text-muted-foreground mb-1">
             Investment
           </div>
           <CurrencyInput
@@ -81,7 +81,7 @@ const SeriesInvestorRow: React.FC<SeriesRowProps> = ({
             onValueChange={onValueChange}
             placeholder="Investment"
             autoComplete="off"
-            className="w-full bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full"
             prefix="$"
             decimalScale={0}
             customInput={Input}
@@ -89,10 +89,10 @@ const SeriesInvestorRow: React.FC<SeriesRowProps> = ({
         </div>
 
         <div className="mb-3 md:mb-0 md:flex-1">
-          <div className="text-gray-500 dark:text-gray-400 mb-1">
+          <div className="text-muted-foreground mb-1">
             Ownership %
           </div>
-          <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded">
+          <div className="px-3 py-2 bg-background border border-input rounded-md">
             {data.ownershipPct.toFixed(2)}%
           </div>
         </div>
@@ -121,7 +121,8 @@ const SeriesInvestorList: React.FC<RowsProps<SeriesProps>> = ({
       <div className="w-full max-w-full sm:max-w-[960px] mx-auto">
         <Button
           onClick={onAddRow}
-          className="w-full bg-nt84blue hover:bg-nt84bluedarker dark:text-white"
+          variant="default"
+          className="w-full"
         >
           + Add another Series Investor
         </Button>

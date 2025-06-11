@@ -17,12 +17,10 @@ const Finder: React.FC<{
 
   const buttonText = () => {
     return (
-      <span>
+      <>
         History
-        <span className="inline">
-          <FaRegClock className="inline ml-2" width={20} />
-        </span>
-      </span>
+        <FaRegClock width={16} />
+      </>
     );
   };
 
@@ -109,7 +107,8 @@ const Finder: React.FC<{
   return (
     <div className="">
       <Button
-        className="w-28 bg-nt84blue hover:bg-nt84bluedarker dark:text-white"
+        variant="minimal"
+        className="w-28"
         onClick={() => setShowModal(true)}
       >
         {buttonText()}
@@ -117,15 +116,15 @@ const Finder: React.FC<{
       {showModal && (
         <div className="fixed z-50 inset-0 flex items-center justify-center overflow-hidden">
           <div className="fixed inset-0 transition-opacity">
-            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            <div className="absolute inset-0 bg-black/50"></div>
           </div>
 
-          <div className=" text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-            <div className="bg-white dark:bg-gray-900 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <h3 className="text-xl leading-6 font-medium text-gray-900 dark:text-gray-100 mb-4">
+          <div className="text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+            <div className="bg-background px-4 pt-5 pb-4 sm:p-6 sm:pb-4 rounded-t-md">
+              <h3 className="text-xl leading-6 font-medium mb-4">
                 Recent Cap Tables
               </h3>
-              <ul>
+              <ul className="space-y-2">
                 {recentStates().map((state) => (
                   <li key={state.id}>
                     <a
@@ -133,14 +132,14 @@ const Finder: React.FC<{
                         loadById(state.id);
                         setShowModal(false);
                       }}
-                      className={`text-blue-500 hover:underline dark:text-blue-200 ${
+                      className={`block p-2 rounded cursor-pointer hover:bg-accent transition-colors ${
                         state.id === currentId
-                          ? "bg-gray-100 dark:bg-gray-800"
+                          ? "bg-muted"
                           : ""
                       }`}
                     >
-                      {state.id.slice(0, 7)} - {describeCapTable(state.state)}{" "}
-                      <span className="text-xs text-gray-900 dark:text-gray-300">
+                      <span className="text-foreground font-medium">{state.id.slice(0, 7)}</span> - {describeCapTable(state.state)}{" "}
+                      <span className="text-xs text-muted-foreground">
                         ({getRelativeTimeString(state.updatedAt)})
                       </span>
                     </a>
@@ -148,10 +147,10 @@ const Finder: React.FC<{
                 ))}
               </ul>
             </div>
-            <div className="bg-gray-200 dark:bg-gray-800 px-4 py-3 sm:flex sm:flex-row-reverse">
+            <div className="bg-muted px-4 py-3 sm:flex sm:flex-row-reverse rounded-b-md">
               <Button
                 type="button"
-                variant="secondary"
+                variant="minimal"
                 className="sm:ml-3 sm:w-auto sm:text-sm"
                 onClick={() => setShowModal(false)}
               >
