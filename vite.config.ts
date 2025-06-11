@@ -12,5 +12,5 @@ export default defineConfig({
       '@library': "/src/library",
     },
   },
-  base: '/startup-finance/'
+  base: process.env.NODE_ENV === 'production' ? '/' : '/startup-finance/'
 })
