@@ -39,3 +39,8 @@ Code.js
 build
 gas-build
 dist
+*.env
+
+# python
+*.pyc
+__pycache__/
